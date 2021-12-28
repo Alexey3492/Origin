@@ -1,0 +1,107 @@
+My first change Hrenov
+Private Sub ComboBox1_Change()
+
+End Sub
+
+Private Sub CommandButton1_Click()
+Dim Ôàìèëèÿ As String * 20
+Dim Èìÿ As String * 20
+Dim Ïîë As String * 3
+Dim ÂûáðàííûéÒóð As String * 20
+Dim Îïëà÷åíî As String * 3
+Dim Ôîòî As String * 3
+Dim Ïàñïîðò As String * 3
+Dim Ñðîê As String * 3
+Dim ÍîìåðÑòðîêè As Integer
+ÍîìåðÑòðîêè = ActiveSheet.Range("A1").CurrentRegion.Rows.Count + 1
+With UserForm1
+Ôàìèëèÿ = TextBox1.Text
+Èìÿ = TextBox2.Text
+Ñðîê = TextBox3.Text
+If Frame1.OptionButton1.Value = True Then
+Ïîë = "Ìóæ"
+Else
+Ïîë = "Æåí"
+End If
+If Frame3.CheckBox1.Value = True Then
+Îïëà÷åíî = "Äà"
+Else
+Îïëà÷åíî = "Íåò"
+End If
+If Frame3.CheckBox2.Value = True Then
+Ôîòî = "Äà"
+Else
+Ôîòî = "Íåò"
+End If
+If Frame3.CheckBox3.Value = True Then
+Ïàñïîðò = "Äà"
+Else
+Ïàñïîðò = "Íåò"
+End If
+ÂûáðàííûéÒóð = ComboBox1.Text
+End With
+With ActiveSheet
+.Cells(ÍîìåðÑòðîêè, 1).Value = Ôàìèëèÿ
+.Cells(ÍîìåðÑòðîêè, 2).Value = Èìÿ
+.Cells(ÍîìåðÑòðîêè, 3).Value = Ïîë
+.Cells(ÍîìåðÑòðîêè, 4).Value = ÂûáðàííûéÒóð
+.Cells(ÍîìåðÑòðîêè, 5).Value = Îïëà÷åíî
+.Cells(ÍîìåðÑòðîêè, 6).Value = Ôîòî
+.Cells(ÍîìåðÑòðîêè, 7).Value = Ïàñïîðò
+.Cells(ÍîìåðÑòðîêè, 8).Value = Ñðîê
+End With
+End Sub
+
+Private Sub CommandButton2_Click()
+TextBox1.Text = ""
+TextBox2.Text = ""
+End Sub
+
+Private Sub CommandButton3_Click()
+UserForm1.Hide
+Application.Caption = Empty
+End Sub
+
+Private Sub ScrollBar1_Change()
+With UserForm1
+TextBox3.Text = CStr(ScrollBar1.Value)
+End With
+End Sub
+
+Private Sub TextBox3_Change()
+With UserForm1
+ScrollBar1.Value = CInt(TextBox3.Text)
+End With
+End Sub
+
+
+Private Sub UserForm_Initialize()
+ÇàãîëîâîêÐàáî÷åãîËèñòà
+Application.Caption = "Ðåãèñòðàöèÿ. Áàçà äàííûõ òóðèñòîâ"
+Application.DisplayFormulaBar = False
+With CommandButton1
+.Default = True
+.ControlTipText = "Ââîä äàííûõ â áàçó äàííûõ"
+End With
+With CommandButton3
+.Cancel = True
+.ControlTipText = "Êíîïêà îòìåíà"
+End With
+With ComboBox1
+.List = Array("Ëîíäîí", "Ïàðèæ", "Áåðëèí")
+.ListIndex = 0
+End With
+End Sub
+Sub ÇàãîëîâîêÐàáî÷åãîËèñòà()
+If Range("A1").Value = "Ôàìèëèÿ" Then
+Range("A2").Select
+Exit Sub
+End If
+ActiveSheet.Cells.Clear
+Range("a1:h1").Value = Array("Ôàìèëèÿ", "Èìÿ", "Ïîë", "Âûáðàííûé òóð", "Îïëà÷åíî", "Ôîòî", "Ïàñïîðò", "Ñðîê")
+Range("A:A").ColumnWidth = 12
+Range("d:d").ColumnWidth = 14.4
+Range("2:2").Select
+ActiveWindow.FreezePanes = True
+Range("A2").Select
+End Sub
